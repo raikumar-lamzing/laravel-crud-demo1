@@ -15,7 +15,7 @@
         <table class="table table-striped mt-4">
             <thead>
                 <tr>
-                    <th>Full Name</th>
+                    <th>FullName >>>>>></th>
                     <th>Department</th>
                     <th>Email</th>
                     <th>Action</th>
