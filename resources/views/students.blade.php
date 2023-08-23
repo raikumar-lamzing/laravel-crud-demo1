@@ -15,7 +15,7 @@
         <table class="table table-striped mt-4">
             <thead>
                 <tr>
-                    <th>FullName >>>>>></th>
+                    <th>FullName</th>
                     <th>Department</th>
                     <th>Email</th>
                     <th>Action</th>
@@ -27,8 +27,10 @@
                         <td>{{ $student->name }}</td>
                         <td>{{ $student->department }}</td>
                         <td>{{ $student->email }}</td>
-                        <td><button type="button" class="btn btn-info btn-sm">Update</button> <button type="button"
-                                class="btn btn-danger btn-sm">Delete</button></td>
+                        <td><a href="/edit-student/{{$student->id}}" type="button" class="btn btn-info btn-sm">Update</a> 
+                            
+                            <a href="/remove-student/{{$student->id}}" type="button"
+                                class="btn btn-danger btn-sm">Delete</a></td>
                     </tr>
                 @endforeach
 
