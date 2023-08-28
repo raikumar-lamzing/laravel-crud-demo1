@@ -1,20 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <title>Bootstrap Example</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-</head>
-
-<body>
-
+@extends('layouts.main')
+@section('title', 'Edit Student: '.$student->name)
+@section('main')
     <div class="container mt-5">
         <h2>Add New Student </h2>
+        
         @if ($errors->any())
             <div class="alert alert-danger mt-5">
                 <ul>
@@ -54,6 +44,4 @@
         </form>
     </div>
 
-</body>
-
-</html>
+@endsection
