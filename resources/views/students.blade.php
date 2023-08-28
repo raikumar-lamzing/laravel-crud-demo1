@@ -19,6 +19,7 @@
                     <th>Department</th>
                     <th>Email</th>
                     <th>Action</th>
+                    <th>Test</th>
                 </tr>
             </thead>
             <tbody>
@@ -31,6 +32,7 @@
                             
                             <a href="/remove-student/{{$student->id}}" type="button"
                                 class="btn btn-danger btn-sm">Delete</a></td>
+                                <td>test</td>
                     </tr>
                 @endforeach
 

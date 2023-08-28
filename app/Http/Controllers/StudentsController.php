@@ -56,4 +56,10 @@ class StudentsController extends Controller
         $student->save();
         return redirect('/');
     }
+    public function removestudent($id){
+        $student = Students::where('id', $id)->first();
+        $student->delete();
+        return redirect('/');
+    }
+    
 }
