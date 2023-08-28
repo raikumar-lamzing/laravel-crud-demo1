@@ -8,8 +8,9 @@ class StudentsController extends Controller
 {
     public function index(){
         $students = Students::all();
+        $msg = "hello world";
         //var_dump($students);
-        return view("students", ["list"=>$students]);
+        return view("students", ["list"=>$students, "count"=>6, "message"=> $msg ]);
     }
 
     public function addnew(){
@@ -33,6 +34,8 @@ class StudentsController extends Controller
 
     public function editstudent($id){
         $student = Students::where('id', $id)->first();
+        $msg = "hello world";
+        $count = 123;
         return view('students.updatestudent', ['student'=>$student]);
     }
 
