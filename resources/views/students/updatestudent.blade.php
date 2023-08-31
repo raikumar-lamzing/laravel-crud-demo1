@@ -40,6 +40,22 @@
                 @enderror
             </div>
 
+            <div class="form-group">
+                <label for="email">Image:</label>
+                <input type="file" class="form-control" name="image" @error('image') is-invalid @enderror>
+            
+              @error('image')
+                  <span class="invalid-feedback" role="alert">
+                      <strong>{{ $message }}</strong>
+                  </span>
+              @enderror
+              @if($student->image)
+              <img src="{{ asset('images/'.$student->image) }}" style="height: 50px;width:100px;">
+              @else 
+              <span>No image found!</span>
+              @endif
+            </div>
+
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>
