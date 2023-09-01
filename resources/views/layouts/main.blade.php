@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="{{ asset('css/bsstyle.css') }}">
 </head>
 <body>
+    
 @yield('main')
 
 </body>

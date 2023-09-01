@@ -7,7 +7,7 @@ use App\Models\Students;
 class StudentsController extends Controller
 {
     public function index(){
-        $students = Students::latest()->paginate(4);
+        $students = Students::latest()->paginate(5);
         $msg = "hello world";
         //var_dump($students);
         return view("students", ["list"=>$students, "count"=>6, "message"=> $msg ]);
@@ -59,17 +59,33 @@ class StudentsController extends Controller
     public function updatesubmit(Request $request, $id){
         //dd($request->name);
         $student = Students::where('id', $id)->first();
-        $validated = $request->validate([
-            'name' => 'required|min:3',
-            'email' =>  [
-                'required',
-                Rule::unique('students', 'email')->ignore($id),
-              ],
-            'department' => 'required',
-        'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
-        ]);
-        $fileName = time() . '.' . $request->image->extension();
-        $request->image->storeAs('public/images', $fileName);
+        $fileName = $student->image;
+       
+        if ($request->hasFile('image')) {
+            $validated = $request->validate([
+                'name' => 'required|min:3',
+                'email' =>  [
+                    'required',
+                    Rule::unique('students', 'email')->ignore($id),
+                  ],
+                'department' => 'required',
+                'image' =>'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+            ]);
+            $fileName = time() . '.' . $request->image->extension();
+            error_log('File name: '.$fileName );
+         
+            $request->image->move(public_path('images'), $fileName);
+        }else{
+            $validated = $request->validate([
+                'name' => 'required|min:3',
+                'email' =>  [
+                    'required',
+                    Rule::unique('students', 'email')->ignore($id),
+                  ],
+                'department' => 'required'
+            ]);
+            error_log('File name2222: '.$fileName );
+        }
         $student->name = $request->name;
         $student->email = $request->email;
         $student->department = $request->department;

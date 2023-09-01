@@ -14,7 +14,7 @@
                 </ul>
             </div>
         @endif
-        <form class="pt-4" method="POST" action="/update-submit-student/{{$student->id}}">
+        <form class="pt-4" method="POST" action="/update-submit-student/{{$student->id}}" enctype="multipart/form-data">
             @csrf
             @method('PUT')
             <div class="form-group">
