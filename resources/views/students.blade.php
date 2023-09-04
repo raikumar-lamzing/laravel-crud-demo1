@@ -13,6 +13,7 @@
                     <th>Email</th>
                     <th>Image </th>
                     <th>Action</th>
+                    <th>Test</th>
                 </tr>
             </thead>
             <tbody>
@@ -22,6 +23,7 @@
                         <td>{{ $ss->name }}</td>
                         <td>{{ $ss->department }}</td>
                         <td>{{ $ss->email }}</td>
+
                         <td>
                             @if ($ss->image)
                                 <img src="{{ asset('images/' . $ss->image) }}" style="height: 150px;width:200px;">
@@ -34,6 +36,7 @@
                             <a href="/remove-student/{{ $ss->id }}" type="button"
                                 class="btn btn-danger btn-sm">Delete</a>
                         </td>
+
                     </tr>
                 @endforeach
 
