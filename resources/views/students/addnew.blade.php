@@ -12,7 +12,7 @@
                 </ul>
             </div>
         @endif
-        <form class="pt-4" method="POST" action="/store-student">
+        <form class="pt-4" method="POST" action="/store-student" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
                 <label for="name">Name:</label>
@@ -35,6 +35,17 @@
                 @error('email')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
+            </div>
+
+            <div class="form-group">
+                <label for="image">Image:</label>
+                <input type="file" class="form-control" name="image" >
+            
+              @error('image')
+                  <span class="invalid-feedback" role="alert">
+                      <strong>{{ $message }}</strong>
+                  </span>
+              @enderror
             </div>
 
             <button type="submit" class="btn btn-primary">Submit</button>

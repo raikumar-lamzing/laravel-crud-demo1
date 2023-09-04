@@ -32,3 +32,4 @@ Route::get('/edit-student/{id}', [StudentsController::class, 'editstudent']);
 Route::put('/update-submit-student/{id}', [StudentsController::class, 'updatesubmit']);
 
 Route::get('/remove-student/{id}', [StudentsController::class, 'removestudent']);
+
