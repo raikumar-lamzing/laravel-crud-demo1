@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Students;
 class StudentsController extends Controller
 {
-    public function index(){
+    public function studentList(){
         $students = Students::latest()->paginate(5);
         $msg = "hello world";
         //var_dump($students);

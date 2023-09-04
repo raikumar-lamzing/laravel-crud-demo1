@@ -1,7 +1,11 @@
 @extends('layouts.main')
-@section('title', 'Home Page')
+@section('title', 'Dashboard Page')
 @section('main')
-
+@guest
+<div class="container mt-5">
+    <h2>You are not authorized to visit this page</h2>
+</div>
+@else   
     <div class="container mt-5">
         <h2>Student List</h2>
         <a href="/addstudent" type="button" class="btn btn-primary btn-sm">Add New Student</a>
@@ -45,5 +49,5 @@
      </div>
         
     </div>
-
+    @endguest
 @endsection
