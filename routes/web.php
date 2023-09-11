@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StudentsController;
+use App\Http\Controllers\Auth\LoginRegisterController;
+use App\Http\Controllers\Controller;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,12 +20,13 @@ use App\Http\Controllers\StudentsController;
 //     return view('students');
 // });
 
-Route::get('/', [StudentsController::class, 'index']);
+Route::get('/', [Controller::class, 'index']);
 
+Route::get('/students',[StudentsController::class, 'studentList']);
 // Route::get('/addstudent', function () {
 //     return view('students.addnew');
 // });
-Route::get('/addstudent', [StudentsController::class, 'addnew']);
+Route::get('/addstudent', [StudentsController::class, 'addnew'])->middleware('auth');
 
 Route::post('/store-student', [StudentsController::class, 'storestudent']);
 
@@ -33,3 +36,11 @@ Route::put('/update-submit-student/{id}', [StudentsController::class, 'updatesub
 
 Route::get('/remove-student/{id}', [StudentsController::class, 'removestudent']);
 
+Route::controller(LoginRegisterController::class)->group(function() {
+    Route::get('/register', 'register')->name('register');
+    Route::post('/store', 'store')->name('store');
+    Route::get('/login', 'login')->name('login');
+    Route::post('/authenticate', 'authenticate')->name('authenticate');
+    Route::get('/dashboard', 'dashboard')->name('dashboard');
+    Route::post('/logout', 'logout')->name('logout');
+});

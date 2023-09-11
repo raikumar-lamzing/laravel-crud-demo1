@@ -4,9 +4,10 @@ namespace App\Http\Controllers;
 use Illuminate\Validation\Rule; 
 use Illuminate\Http\Request;
 use App\Models\Students;
+use Illuminate\Support\Facades\Auth;
 class StudentsController extends Controller
 {
-    public function index(){
+    public function studentList(){
         $students = Students::latest()->paginate(5);
         $msg = "hello world";
         //var_dump($students);
@@ -35,14 +36,25 @@ class StudentsController extends Controller
         $student->department = $request->department;
         $student->image = $imageName;
         $student->save();
-        return redirect('/');
+        return redirect('/students')->with('status',"Successfully Inserted new record!");
     }
 
-    public function editstudent($id){
-        $student = Students::where('id', $id)->first();
-        $msg = "hello world";
-        $count = 123;
-        return view('students.updatestudent', ['student'=>$student]);
+    public function editstudent($idd){
+        $user = Auth::user(); // Retrieve the currently authenticated user...
+        $id = Auth::id(); // Retrieve the currently authenticated user's ID...
+
+        error_log('user: '. $user);
+        error_log('user id: '. $id ." \n check user is login or not ".Auth::check());
+        
+        if(Auth::check()){
+            $student = Students::where('id', $idd)->first();
+            $msg = "hello world";
+            $count = 123;
+            return view('students.updatestudent', ['student'=>$student]);
+        }else{
+            return redirect('/students');
+        }
+      
     }
 
     
@@ -50,7 +62,7 @@ class StudentsController extends Controller
     public function removestudent($id){
         $student = Students::where('id', $id)->first();
         $student->delete();
-        return redirect('/');
+        return redirect('/students')->with('status'," Deleted successfully!");
     }
 
 
@@ -91,12 +103,8 @@ class StudentsController extends Controller
         $student->department = $request->department;
         $student->image = $fileName; 
         $student->save();
-        return redirect('/');
+        return redirect('/students')->with('status',"Successfully edited!");
     }
-    public function removestudent($id){
-        $student = Students::where('id', $id)->first();
-        $student->delete();
-        return redirect('/');
-    }
+   
     
 }
