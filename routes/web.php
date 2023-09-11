@@ -21,11 +21,12 @@ use App\Http\Controllers\Controller;
 // });
 
 Route::get('/', [Controller::class, 'index']);
+
 Route::get('/students',[StudentsController::class, 'studentList']);
 // Route::get('/addstudent', function () {
 //     return view('students.addnew');
 // });
-Route::get('/addstudent', [StudentsController::class, 'addnew']);
+Route::get('/addstudent', [StudentsController::class, 'addnew'])->middleware('auth');
 
 Route::post('/store-student', [StudentsController::class, 'storestudent']);
 
