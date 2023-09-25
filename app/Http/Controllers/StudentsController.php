@@ -4,14 +4,16 @@ namespace App\Http\Controllers;
 use Illuminate\Validation\Rule; 
 use Illuminate\Http\Request;
 use App\Models\Students;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 class StudentsController extends Controller
 {
     public function studentList(){
-        $students = Students::latest()->paginate(5);
+        //$users = User::all();
+        $students = Students::with('user')->latest()->paginate(5);
         $msg = "hello world";
-        //var_dump($students);
-        return view("students", ["list"=>$students, "count"=>6, "message"=> $msg ]);
+        error_log('Students: '.Students::with('user')->get());
+        return view("students", ["list"=>$students, "count"=>6, "message"=> $msg]);
     }
 
     public function addnew(){
@@ -28,6 +30,7 @@ class StudentsController extends Controller
         ]);
         error_log('File size: '.$request->image->getSize());
         $imageName = time().'.'.$request->image->extension();
+        $id = Auth::id(); 
         // Public Folder
         $request->image->move(public_path('images'), $imageName);
         $student = new Students;
@@ -35,6 +38,7 @@ class StudentsController extends Controller
         $student->email = $request->email;
         $student->department = $request->department;
         $student->image = $imageName;
+        $student->user_id = $id;
         $student->save();
         return redirect('/students')->with('status',"Successfully Inserted new record!");
     }

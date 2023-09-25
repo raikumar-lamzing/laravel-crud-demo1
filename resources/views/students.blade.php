@@ -11,10 +11,10 @@
             <a href="/addstudent" type="button" class="btn btn-primary btn-sm">Add New Student</a>
 
             @if (session('status'))
-            <div class="alert alert-success">
-                {{ session('status') }}
-            </div>
-        @endif
+                <div class="alert alert-success">
+                    {{ session('status') }}
+                </div>
+            @endif
             <table class="table table-striped mt-4">
                 <thead>
                     <tr>
@@ -22,6 +22,7 @@
                         <th>Department</th>
                         <th>Email</th>
                         <th>Image </th>
+                        <th>Inserted By </th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -37,6 +38,11 @@
                                     <img src="{{ asset('images/' . $ss->image) }}" style="height: 150px;width:200px;">
                                 @else
                                     <span>No image found!</span>
+                                @endif
+                            </td>
+                            <td>
+                                @if ($ss->user_id != 0)
+                                    {{ $ss->user->name }}
                                 @endif
                             </td>
                             <td><a href="/edit-student/{{ $ss->id }}" type="button" class="btn btn-info btn-sm">Update</a>

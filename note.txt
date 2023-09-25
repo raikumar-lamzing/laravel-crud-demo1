@@ -1,0 +1,38 @@
+25 Sep 2023
+
+Foreign key linking (Users table id link with Student table)
+
+
+create a new foreign key field (user_id) in existing Student table
+# php artisan make:migration add_user_id_in_students_table --table=students
+
+Then it will create a new migration file and add this fields in class
+
+$table->biginteger('user_id')->unsigned();
+$table->foreignId('user_id')->nullable()->references('id')->on('users')->onDelete('cascade');
+
+
+and then run migrate 
+
+# php artisan migrate
+
+
+Go to Students model file (app/Models/Students) and paste this function
+
+public function user() 
+{
+    return $this->belongsTo(User::class, 'user_id');
+}
+
+Go to StudentsController file and modify the studentList function\
+
+ $students = Students::with('user')->latest()->paginate(5);
+
+
+Modifying template: Go to student.blade.php and add this code 
+    <td>
+        @if ($ss->user_id != 0)
+            {{ $ss->user->name }}
+        @endif
+    </td>
+
