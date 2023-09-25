@@ -8,10 +8,12 @@ use Illuminate\Support\Facades\Auth;
 class StudentsController extends Controller
 {
     public function studentList(){
-        $students = Students::latest()->paginate(5);
+        //$users = User::all();
+        $students = Students::with('user')->latest()->paginate(5);
         $msg = "hello world";
         //var_dump($students);
-        return view("students", ["list"=>$students, "count"=>6, "message"=> $msg ]);
+        error_log('Students: '.Students::with('user')->get());
+        return view("students", ["list"=>$students, "count"=>6, "message"=> $msg]);
     }
 
     public function addnew(){

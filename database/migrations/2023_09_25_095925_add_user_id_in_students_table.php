@@ -12,7 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('students', function (Blueprint $table) {
-            $table->string('image')->nullable();
+           // $table->biginteger('user_id')->unsigned();
+            $table->foreignId('user_id')->nullable()->references('id')->on('users')->onDelete('cascade');
         });
     }
 
